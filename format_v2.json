@@ -1,0 +1,74 @@
+{
+	"tracking_id": "TK-HEWM4FW", //跟踪id
+	"api_secret": "", //api密钥
+	"user_id": "", //用户id 用于登录系统
+	"version": "1.0.0", //sdk版本
+	"api_version": "1.0.0", //api 版本
+	"client_id": "123", //指纹
+	"events": [{
+		"name": "screen_view", //事件类型 'screen_view' | 'timing' | 'exception' | 'event' | 'social'
+		"local_time_ms": 0, //触发时间
+		"params": {
+
+			/*基础信息公共部分*/
+			"scene_id": "", //场景id
+			"ga_id": "", //ga id,
+			"ip": "", // ip 服务端填
+			"referrer": "", //来源
+			"geoid": "", //地理位置信息
+			"resolution": "", //分辨率
+
+			/*website base info*/
+			"ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/117.0.0.0 Safari/537.36",
+			"url": "http://localhost:63342/analytics/analytics/test",
+			"host": "localhost:63342",
+			"path": "/analytics/analytics/test/test.html",
+			"title": "Title",
+			"page_load_time": 0,
+			"page_download_time": 0.2000000011175871,
+			"redirect_time": 0,
+			"tcp": 0,
+			"dns": 0,
+			"serve_response_time": 1.799999998882413,
+			"content_load_time": 0,
+
+
+			/*app base info*/
+			"app_name": "", //app名称
+			"package_name": "", // app 包名
+			"app_version": "", // app版本
+			"os_name": "", //系统名称
+			"device_model": "", //设备名称
+			"os_version": "", //系统版本
+			"template_version": "",
+
+
+			/*screen_view*/
+			"page_name": "home",
+			"screen_id": "124",
+
+			/*事件*/
+			"event_name": "", // 事件名称
+			"event_category": "", //事件类别
+			"event_label": "", //事件标签
+			"event_action": "", //事件动作
+			"event_value": 0, //事件权重
+
+			/*异常上报*/
+			"ex_fatal": true, //是否致命
+			"ex_description": "",
+
+			/*社交活动*/
+			"social_name": "", //社交名称
+			"social_action": "", //社交动作
+			"social_target": "", //社交标签
+
+			/*停留时长*/
+			"timing_category": "", //计时类别
+			"timing_var": "", //计时变量
+			"timing_value": "", //计时时间
+			"timing_label": "", //计时标签
+
+		}
+	}]
+}
