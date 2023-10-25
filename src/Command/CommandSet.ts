@@ -1,22 +1,33 @@
-import {ICTagContext} from "../Bootstrap/CTagContext";
-import {CommandBase} from "./CommandBase";
-import {GlobalConfiguration} from "../Types/Configuration";
-import {BaseInfoConfig} from "../Types/BaseInfo";
-export type SetModuleName = "global" | "page"
+import { ICTagContext } from "../Bootstrap/CTagContext";
+import { CommandBase } from "./CommandBase";
+import { GlobalConfiguration } from "../Types/Configuration";
+import { PageConfig } from "../Types/BaseInfo";
+export type SetModuleName = "global" | "page" | "custom";
 export class CommandSet extends CommandBase {
-    static NAME = "set";
-    readonly version:string = "1.0.0";
-    constructor(ctx:ICTagContext) {
-        super(ctx)
+  static NAME = "set";
+  readonly version: string = "1.0.0";
+  constructor(ctx: ICTagContext) {
+    super(ctx);
+  }
+  async execute(
+    module: SetModuleName,
+    config: GlobalConfiguration | PageConfig | object,
+    trackingId?: string
+  ) {
+    switch (module) {
+      case "global":
+        this.ctx.setters.globalConfig(config as GlobalConfiguration);
+        break;
+      case "page":
+        this.ctx.getters
+          .instance(trackingId)
+          ?.setPageConfig(config as PageConfig);
+        break;
+      case "custom":
+        this.ctx.getters
+            .instance(trackingId)
+            ?.setCustomData(config);
+        break;
     }
-    async execute(module:SetModuleName,config:GlobalConfiguration | BaseInfoConfig,trackingId?:string) {
-        switch (module) {
-          case "global":
-              this.ctx.setters.globalConfig(config as GlobalConfiguration);
-              break;
-          case "page":
-              this.ctx.getters.instance(trackingId)?.setBaseInfo(config as BaseInfoConfig);
-              break;
-        }
-    }
+  }
 }

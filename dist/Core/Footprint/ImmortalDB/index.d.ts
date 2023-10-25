@@ -1,6 +1,6 @@
-import { CookieStore } from './CookieStore';
-import { IndexedDbStore } from './IndexDB';
-import { LocalStorageStore, SessionStorageStore } from './WebStorage';
+import { CookieStore } from "./CookieStore";
+import { IndexedDbStore } from "./IndexDB";
+import { LocalStorageStore, SessionStorageStore } from "./WebStorage";
 import { Store } from "./Store";
 declare const DEFAULT_KEY_PREFIX = "_immortal|";
 declare const DEFAULT_STORES: Store[];

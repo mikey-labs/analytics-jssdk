@@ -1,82 +1,91 @@
-import {Configuration} from "../Types/Configuration";
-import {BaseInfo, BaseInfoConfig} from "../Types/BaseInfo";
-import {assignObjectFilterSource} from "../Utils/AssignObjectFilterSource";
-import {StayDurationTrigger} from "./Trigger/StayDurationTrigger";
-import {TriggerBase} from "./Trigger/TriggerBase";
-import {ExceptionReportTrigger} from "./Trigger/ExceptionReportTrigger";
-import {ScreenViewTrigger} from "./Trigger/ScreenViewTrigger";
+import { Configuration } from "../Types/Configuration";
+import {PageConfig} from "../Types/BaseInfo";
+import { assignObjectFilterSource } from "../Utils/AssignObjectFilterSource";
+import { StayDurationTrigger } from "./Trigger/StayDurationTrigger";
+import { TriggerBase } from "./Trigger/TriggerBase";
+import { ExceptionReportTrigger } from "./Trigger/ExceptionReportTrigger";
+import { ScreenViewTrigger } from "./Trigger/ScreenViewTrigger";
 export type ITagManagerTriggers = {
-    stay_duration:TriggerBase,
-    exception_report:TriggerBase,
-    screen_view:TriggerBase
-}
+  stay_duration: TriggerBase;
+  exception_report: TriggerBase;
+  screen_view: TriggerBase;
+};
 export interface ITagManager {
-    readonly trackingId:string;
-    readonly hTime:number;
-    triggers:ITagManagerTriggers;
-    baseInfo:BaseInfo;
-    config:Configuration;
-    setConfig(config:Configuration):void;
-    setBaseInfo(baseInfo:BaseInfoConfig):void;
-    run():void;
+  readonly trackingId: string;
+  readonly hTime: number;
+  triggers: ITagManagerTriggers;
+  pageConfig: PageConfig;
+  config: Configuration;
+  setConfig(config: Configuration): void;
+  setPageConfig(pageConfig: PageConfig): void;
+  setCustomData(customData: object): void;
+  customData:{[p:string]:any};
+  run(): void;
 }
-export class TagManager implements ITagManager{
-    readonly trackingId:string;
-    readonly hTime:number = Date.now();
-    readonly triggers;
-    config:Configuration = {
-        stay_duration:true,
-        screen_view:true,
-        exception_report:false,
-        disable:false,
+export class TagManager implements ITagManager {
+  customData = {};
+  readonly trackingId: string;
+  readonly hTime: number = Date.now();
+  readonly triggers;
+  config: Configuration = {
+    stay_duration: true,
+    screen_view: true,
+    exception_report: false,
+    disable: false,
+  };
+  pageConfig: PageConfig = {
+    title:document.title,
+    host:location.host,
+    path:location.pathname,
+    url:location.href,
+    referrer:document.referrer
+  };
+  constructor(trackingId: string, options?: Configuration) {
+    this.trackingId = trackingId;
+    this.triggers = {
+      stay_duration: new StayDurationTrigger(trackingId),
+      exception_report: new ExceptionReportTrigger(trackingId),
+      screen_view: new ScreenViewTrigger(trackingId),
     };
-    baseInfo:BaseInfo;
-    constructor(trackingId:string,baseInfo:BaseInfo,options?:Configuration) {
-        this.trackingId = trackingId;
-        this.baseInfo = baseInfo;
-        this.triggers = {
-            stay_duration: new StayDurationTrigger(trackingId),
-            exception_report: new ExceptionReportTrigger(trackingId),
-            screen_view: new ScreenViewTrigger(trackingId)
-        };
-        options && (this.config = assignObjectFilterSource(this.config,options));
-    }
-    setConfig(config:Configuration){
-        this.config = assignObjectFilterSource(this.config,config);
-        this.run(config);
-    }
-    setBaseInfo(baseInfo:BaseInfoConfig){
-        this.baseInfo = assignObjectFilterSource(this.baseInfo,baseInfo);
-    }
-    run(config:Configuration = this.config):void{
-       const {stay_duration,exception_report,screen_view,disable} = config;
+    options && (this.config = assignObjectFilterSource(this.config, options));
+  }
+  setCustomData(customData: object) {
+    this.customData = Object.assign(this.customData,customData);
+  }
+  setConfig(config: Configuration) {
+    this.config = assignObjectFilterSource(this.config, config);
+    this.run(config);
+  }
+  setPageConfig(pageConfig: PageConfig) {
+    this.pageConfig = assignObjectFilterSource(this.pageConfig, pageConfig);
+  }
+  run(config: Configuration = this.config): void {
+    const { stay_duration, exception_report, screen_view, disable } = config;
 
-       if(disable){
-           this.stopAll();
-           return;
-       }
-
-       if(screen_view){
-           this.triggers.screen_view.start();
-       } else {
-           this.triggers.screen_view.stop();
-       }
-       if(stay_duration){
-           this.triggers.stay_duration.start();
-       } else {
-           this.triggers.stay_duration.stop();
-       }
-       if (exception_report){
-           this.triggers.exception_report.start();
-       } else {
-           this.triggers.exception_report.stop();
-       }
-
-    }
-    stopAll(){
-        Object.keys(this.triggers).map(key=>{
-            this.triggers[key as keyof ITagManagerTriggers ].stop();
-        })
+    if (disable) {
+      this.stopAll();
+      return;
     }
 
+    if (screen_view) {
+      this.triggers.screen_view.start();
+    } else {
+      this.triggers.screen_view.stop();
+    }
+    if (stay_duration) {
+      this.triggers.stay_duration.start();
+    } else {
+      this.triggers.stay_duration.stop();
+    }
+    if (exception_report) {
+      this.triggers.exception_report.start();
+    } else {
+      this.triggers.exception_report.stop();
+    }
+  }
+  stopAll() {
+    Object.keys(this.triggers).map((key) => {
+      this.triggers[key as keyof ITagManagerTriggers].stop();
+    });
+  }
 }

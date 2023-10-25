@@ -1,5 +1,5 @@
 import { CommandBase } from "./CommandBase";
-import {DEFAULT_TAG_NAME, ICTagContext} from "../Bootstrap/CTagContext";
+import { DEFAULT_TAG_NAME, ICTagContext } from "../Bootstrap/CTagContext";
 export type RemoveModuleName = "instance" | "plugin";
 export class CommandRemove extends CommandBase {
   static NAME = "remove";
@@ -16,15 +16,17 @@ export class CommandRemove extends CommandBase {
     const [module, name] = methodName.split(".");
     switch (module as RemoveModuleName) {
       case "instance":
-        const targetName = name === this.ctx.getters.instance()?.trackingId
-          ? DEFAULT_TAG_NAME : name
+        const targetName =
+          name === this.ctx.getters.instance()?.trackingId
+            ? DEFAULT_TAG_NAME
+            : name;
         callback(delete this.ctx.instances[targetName]);
         break;
       case "plugin":
         callback(delete this.ctx.plugins[name]);
         break;
-      default :
-          throw Error("The module name mush 'instance' or 'plugin'!");
+      default:
+        throw Error("The module name mush 'instance' or 'plugin'!");
     }
   }
 }

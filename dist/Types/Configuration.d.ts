@@ -8,4 +8,5 @@ export interface GlobalConfiguration {
     api_secret?: string;
     user_id?: string;
     api_version?: string;
+    api_host?: string;
 }

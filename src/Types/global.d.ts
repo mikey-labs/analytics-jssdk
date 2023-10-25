@@ -4,7 +4,6 @@ import { FuncCnTagManager } from "../Bootstrap";
 declare global {
   interface Window {
     ctag: FuncCnTagManager;
-    CQueue: Command[];
     webkitOfflineAudioContext: OfflineAudioContext;
     openDatabase: Function;
   }
@@ -25,4 +24,4 @@ declare global {
     __proto__: any;
   }
 }
-export {}
+export {};

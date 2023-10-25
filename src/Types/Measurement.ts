@@ -1,15 +1,15 @@
-import {BaseInfo} from "./BaseInfo";
-import {EventEntity} from "./Command";
-import {GlobalConfiguration} from "./Configuration";
-export type EventType = 'screen_view' | 'timing' | 'exception' | 'event' | 'social'
+import { BaseInfo } from "./BaseInfo";
+import {EventEntity, EventType} from "./Events";
+import { GlobalConfiguration } from "./Configuration";
+
 export interface EventParams {
-    name:EventType,
-    local_time_ms:number;
-    params:EventEntity | BaseInfo
+  name: EventType; //事件类型，与实体对应
+  local_time_ms: number; //本地触发事件
+  params: EventEntity & BaseInfo;
 }
-export interface Measurement extends GlobalConfiguration{
-    tracking_id:string,
-    client_id:string,
-    version:string,
-    events:EventParams[],
+export interface Measurement extends GlobalConfiguration {
+  tracking_id: string; //跟踪ID
+  client_id: string;//用户指纹
+  version: string;//SDK版本
+  events: EventParams[];
 }

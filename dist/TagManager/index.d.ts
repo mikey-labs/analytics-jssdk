@@ -1,5 +1,5 @@
 import { Configuration } from "../Types/Configuration";
-import { BaseInfo, BaseInfoConfig } from "../Types/BaseInfo";
+import { PageConfig } from "../Types/BaseInfo";
 import { StayDurationTrigger } from "./Trigger/StayDurationTrigger";
 import { TriggerBase } from "./Trigger/TriggerBase";
 import { ExceptionReportTrigger } from "./Trigger/ExceptionReportTrigger";
@@ -13,13 +13,18 @@ export interface ITagManager {
     readonly trackingId: string;
     readonly hTime: number;
     triggers: ITagManagerTriggers;
-    baseInfo: BaseInfo;
+    pageConfig: PageConfig;
     config: Configuration;
     setConfig(config: Configuration): void;
-    setBaseInfo(baseInfo: BaseInfoConfig): void;
+    setPageConfig(pageConfig: PageConfig): void;
+    setCustomData(customData: object): void;
+    customData: {
+        [p: string]: any;
+    };
     run(): void;
 }
 export declare class TagManager implements ITagManager {
+    customData: {};
     readonly trackingId: string;
     readonly hTime: number;
     readonly triggers: {
@@ -28,10 +33,11 @@ export declare class TagManager implements ITagManager {
         screen_view: ScreenViewTrigger;
     };
     config: Configuration;
-    baseInfo: BaseInfo;
-    constructor(trackingId: string, baseInfo: BaseInfo, options?: Configuration);
+    pageConfig: PageConfig;
+    constructor(trackingId: string, options?: Configuration);
+    setCustomData(customData: object): void;
     setConfig(config: Configuration): void;
-    setBaseInfo(baseInfo: BaseInfoConfig): void;
+    setPageConfig(pageConfig: PageConfig): void;
     run(config?: Configuration): void;
     stopAll(): void;
 }

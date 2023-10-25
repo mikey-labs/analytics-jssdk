@@ -7,9 +7,6 @@ import { BaseInfo } from "../Types/BaseInfo";
 export type PluginDerived = {
     new (options?: any): PluginBase;
 } & typeof PluginBase;
-export type PluginCoreDerived = {
-    new (ctx: ICTagContext): PluginCore;
-} & typeof PluginCore;
 type CommandDerived = {
     new (ctx: ICTagContext): CommandBase;
 } & typeof CommandBase;
@@ -20,6 +17,7 @@ export type ICTagContextGetters = {
     instance(trackingId?: string): ITagManager | undefined;
     plugin(name: string): PluginBase;
     globalConfig(): GlobalConfiguration;
+    customData(trackingId?: string): object;
     clientId(): Promise<string>;
     measurement(): Promise<BaseInfo>;
 };
@@ -79,6 +77,7 @@ export declare class CTagContext implements ICTagContext {
         globalConfig: () => GlobalConfiguration;
         clientId: () => Promise<string>;
         measurement: () => Promise<BaseInfo>;
+        customData: (trackingId?: string) => Promise<object>;
     };
 }
 export declare function buildCTagContext(): Promise<CTagContext>;

@@ -46,7 +46,7 @@
     },
     "dependencies": {
         "@zhengxy/exposure": "0.0.1-beta.6",
-        "@zhengxy/use": "0.0.7-beta.1",
+        "@zhengxy/use": "0.0.8-beta.0",
         "idb-keyval": "^6.2.1",
         "js-cookie": "^3.0.5"
     },

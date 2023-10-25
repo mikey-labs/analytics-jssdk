@@ -9,8 +9,8 @@ dependencies:
     specifier: 0.0.1-beta.6
     version: 0.0.1-beta.6
   '@zhengxy/use':
-    specifier: 0.0.7-beta.1
-    version: 0.0.7-beta.1
+    specifier: 0.0.8-beta.0
+    version: 0.0.8-beta.0
   idb-keyval:
     specifier: ^6.2.1
     version: 6.2.1
@@ -236,8 +236,8 @@ packages:
     resolution: {integrity: sha512-E9MxvFryUacA4Z448iPoj5lTU/fdB8Rgp3vnA6jslFwL2P8ZfFSB+zSVCTXvFzbIDRheo+9snyGjkyiIvlQxkA==}
     dev: false
 
-  /@zhengxy/use@0.0.7-beta.1:
-    resolution: {integrity: sha512-MHCP6tuviQVSGp9TwKU+rkqbH+K01nLeXPFkeIvf8YpFjx8e/ahSiLmbdrM+oCPCXLEPJdsmhUikWFRC3VSLMw==}
+  /@zhengxy/use@0.0.8-beta.0:
+    resolution: {integrity: sha512-nJcNtAbPN2mKC0E6ZjBZjQZGFOqDenJLCIoaDz8xC/SBXM/KnVGFivHVk1EZ2rSro9nomCLecRZUGewDFbdE5g==}
     dev: false
 
   /balanced-match@1.0.2:

@@ -1,1 +1,1 @@
-import './Bootstrap/index';
+import "./Bootstrap/index";

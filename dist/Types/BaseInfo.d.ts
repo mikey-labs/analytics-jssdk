@@ -19,6 +19,7 @@ export interface WebBaseInfo {
     tcp?: number;
     serve_response_time?: number;
     content_load_time?: number;
+    browser_view_type: "desktop" | "mobile";
 }
 export interface AppBaseInfo {
     app_name: string;
@@ -29,7 +30,7 @@ export interface AppBaseInfo {
     os_version: string;
     template_version?: string;
 }
-export interface BaseInfoConfig {
+export interface PageConfig {
     title?: string;
     referrer?: string;
     url?: string;

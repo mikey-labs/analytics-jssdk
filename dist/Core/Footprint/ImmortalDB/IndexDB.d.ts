@@ -1,4 +1,4 @@
-import { UseStore } from 'idb-keyval';
+import { UseStore } from "idb-keyval";
 import { Store } from "./Store";
 declare class IndexedDbStore extends Store {
     store: UseStore;

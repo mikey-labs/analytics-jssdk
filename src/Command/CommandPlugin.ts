@@ -7,11 +7,8 @@ export class CommandPlugin extends CommandBase {
   constructor(ctx: ICTagContext) {
     super(ctx);
   }
-  async execute(
-    pluginAndMethodName: string,
-    ...params: any
-  ) {
-    const [pluginName,methodName] = pluginAndMethodName.split(":");
+  async execute(pluginAndMethodName: string, ...params: any) {
+    const [pluginName, methodName] = pluginAndMethodName.split(":");
     const plugin = this.ctx.plugins[pluginName];
     if (plugin) {
       //@ts-ignore

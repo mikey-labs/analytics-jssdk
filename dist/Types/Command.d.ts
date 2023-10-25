@@ -1,39 +1,14 @@
-import { Event } from "./Event";
-import { ScreenView } from "./ScreenView";
-import { Social } from "./Social";
-import { Timing } from "./Timing";
-import { Exception } from "./Exception";
-import { BaseInfoConfig, WebBaseInfo } from "./BaseInfo";
+import { PageConfig, WebBaseInfo } from "./BaseInfo";
 import { PluginOptions } from "./Plugin";
 import { Configuration } from "./Configuration";
 import { ICTagContext } from "../Bootstrap/CTagContext";
+import { EventEntity, EventType } from "./Events";
 export type FuncOnReady = (ctx: ICTagContext) => void;
-export type EventType = "screen_view" | "event" | "social" | "timing" | "exception";
-export type EventEntity = Event | ScreenView | Social | Timing | Exception | {
-    [p: string]: any;
-};
-export type Command = [
-    "create",
-    string,
-    Configuration?
-] | [
-    "config",
-    Configuration,
-    string?
-] | [
-    "send",
-    EventType,
-    EventEntity,
-    string?
-] | [
+export type Command = ["create", string, Configuration?] | ["config", Configuration, string?] | ["send", EventType, EventEntity, string?] | [
     "set",
-    keyof BaseInfoConfig,
-    Extract<keyof BaseInfoConfig, keyof WebBaseInfo>
-] | [
-    "install",
-    typeof Plugin,
-    PluginOptions
-] | [
+    keyof PageConfig,
+    Extract<keyof PageConfig, keyof WebBaseInfo>
+] | ["install", typeof Plugin, PluginOptions] | [
     "remove",
     string
 ] | [
@@ -41,6 +16,4 @@ export type Command = [
     string,
     (args: any) => any,
     any?
-] | [
-    FuncOnReady
-];
+] | [FuncOnReady];

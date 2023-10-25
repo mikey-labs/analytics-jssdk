@@ -1,7 +1,7 @@
 export interface Plugin {
-    name: string;
-    setup(): void | Promise<void>;
+  name: string;
+  setup(): void | Promise<void>;
 }
 export interface PluginOptions {
-    version:string
+  version: string;
 }

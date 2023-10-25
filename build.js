@@ -8,6 +8,8 @@ const bundle = (format,ext) => {
         // globalName: "CA",
         bundle: true,
         target: ["chrome53"],
+        minify:!isWatch,
+        minifyWhitespace:!isWatch,
         outfile,
         charset: "utf8",
         entryPoints: ["./src/index.ts"],

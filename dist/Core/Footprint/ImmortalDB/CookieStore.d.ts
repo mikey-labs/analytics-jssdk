@@ -4,7 +4,7 @@ declare class CookieStore extends Store {
     secure: boolean;
     sameSite: string;
     _ready: boolean;
-    constructor({ ttl, secure, sameSite }?: {
+    constructor({ ttl, secure, sameSite, }?: {
         ttl?: number | undefined;
         secure?: boolean | undefined;
         sameSite?: string | undefined;
