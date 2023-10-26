@@ -4,4 +4,5 @@ export interface FuncCnTagManager {
     (...arg: Command): void;
     ctx: ICTagContext;
     q: Command[];
+    ad: object | undefined;
 }

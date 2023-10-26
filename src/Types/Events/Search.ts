@@ -1,3 +1,3 @@
 export interface Search {
-    search_term:string
+    search_term:string//关键词
 }

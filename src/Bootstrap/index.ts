@@ -8,6 +8,7 @@ export interface FuncCnTagManager {
   (...arg: Command): void; // 命令函数
   ctx: ICTagContext;
   q: Command[];
+  ad:object | undefined;
 }
 window.ctag.q=window.ctag.q||[];
 window.ctag=window.ctag||function(...args:Command){window.ctag.q.push(args)};
@@ -28,7 +29,11 @@ if (document.currentScript) {
           }
         }
       );
-      window.ctag.q.unshift(["create", trackingId, options]);
+      const command:Command[] = [["create", trackingId, options]]
+      if(window.ctag.ad && typeof window.ctag.ad === 'object'){
+        command.push(["set", 'auto', window.ctag.ad]);
+      }
+      window.ctag.q.unshift(...command);
     }
   }
 }

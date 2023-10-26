@@ -1,13 +1,14 @@
 import { PageConfig, WebBaseInfo } from "./BaseInfo";
 import { PluginOptions } from "./Plugin";
-import { Configuration } from "./Configuration";
+import { Configuration, GlobalConfiguration } from "./Configuration";
 import { ICTagContext } from "../Bootstrap/CTagContext";
 import { EventEntity, EventType } from "./Events";
+import { SetModuleName } from "../Command/CommandSet";
 export type FuncOnReady = (ctx: ICTagContext) => void;
 export type Command = ["create", string, Configuration?] | ["config", Configuration, string?] | ["send", EventType, EventEntity, string?] | [
     "set",
-    keyof PageConfig,
-    Extract<keyof PageConfig, keyof WebBaseInfo>
+    SetModuleName,
+    Extract<keyof PageConfig, keyof WebBaseInfo> | object | GlobalConfiguration
 ] | ["install", typeof Plugin, PluginOptions] | [
     "remove",
     string

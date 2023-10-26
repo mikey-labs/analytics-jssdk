@@ -2,7 +2,7 @@ import { ICTagContext } from "../Bootstrap/CTagContext";
 import { CommandBase } from "./CommandBase";
 import { GlobalConfiguration } from "../Types/Configuration";
 import { PageConfig } from "../Types/BaseInfo";
-export type SetModuleName = "global" | "page" | "custom";
+export type SetModuleName = "global" | "page" | "auto";
 export declare class CommandSet extends CommandBase {
     static NAME: string;
     readonly version: string;

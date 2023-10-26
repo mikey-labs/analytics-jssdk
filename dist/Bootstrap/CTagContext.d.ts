@@ -17,7 +17,7 @@ export type ICTagContextGetters = {
     instance(trackingId?: string): ITagManager | undefined;
     plugin(name: string): PluginBase;
     globalConfig(): GlobalConfiguration;
-    customData(trackingId?: string): object;
+    automaticallyData(trackingId?: string): object;
     clientId(): Promise<string>;
     measurement(): Promise<BaseInfo>;
 };
@@ -77,7 +77,7 @@ export declare class CTagContext implements ICTagContext {
         globalConfig: () => GlobalConfiguration;
         clientId: () => Promise<string>;
         measurement: () => Promise<BaseInfo>;
-        customData: (trackingId?: string) => Promise<object>;
+        automaticallyData: (trackingId?: string) => Promise<object>;
     };
 }
 export declare function buildCTagContext(): Promise<CTagContext>;

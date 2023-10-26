@@ -18,12 +18,12 @@ export interface ITagManager {
   config: Configuration;
   setConfig(config: Configuration): void;
   setPageConfig(pageConfig: PageConfig): void;
-  setCustomData(customData: object): void;
-  customData:{[p:string]:any};
+  setAutomaticallyData(customData: object): void;
+  automaticallyData:{[p:string]:any};
   run(): void;
 }
 export class TagManager implements ITagManager {
-  customData = {};
+  automaticallyData = {};
   readonly trackingId: string;
   readonly hTime: number = Date.now();
   readonly triggers;
@@ -49,8 +49,8 @@ export class TagManager implements ITagManager {
     };
     options && (this.config = assignObjectFilterSource(this.config, options));
   }
-  setCustomData(customData: object) {
-    this.customData = Object.assign(this.customData,customData);
+  setAutomaticallyData(automaticallyData: object) {
+    this.automaticallyData = Object.assign(this.automaticallyData,automaticallyData);
   }
   setConfig(config: Configuration) {
     this.config = assignObjectFilterSource(this.config, config);

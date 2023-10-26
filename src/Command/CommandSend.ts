@@ -35,7 +35,7 @@ export class CommandSend extends CommandBase {
           params: {
             ...entity,
             ...await this.ctx.getters.measurement(),
-            ...instance.customData,
+            ...instance.automaticallyData,
             ...instance.pageConfig,
           },
         },

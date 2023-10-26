@@ -17,14 +17,14 @@ export interface ITagManager {
     config: Configuration;
     setConfig(config: Configuration): void;
     setPageConfig(pageConfig: PageConfig): void;
-    setCustomData(customData: object): void;
-    customData: {
+    setAutomaticallyData(customData: object): void;
+    automaticallyData: {
         [p: string]: any;
     };
     run(): void;
 }
 export declare class TagManager implements ITagManager {
-    customData: {};
+    automaticallyData: {};
     readonly trackingId: string;
     readonly hTime: number;
     readonly triggers: {
@@ -35,7 +35,7 @@ export declare class TagManager implements ITagManager {
     config: Configuration;
     pageConfig: PageConfig;
     constructor(trackingId: string, options?: Configuration);
-    setCustomData(customData: object): void;
+    setAutomaticallyData(automaticallyData: object): void;
     setConfig(config: Configuration): void;
     setPageConfig(pageConfig: PageConfig): void;
     run(config?: Configuration): void;

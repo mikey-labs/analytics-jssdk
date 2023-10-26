@@ -32,7 +32,7 @@ export type ICTagContextGetters = {
   instance(trackingId?: string): ITagManager | undefined;
   plugin(name: string): PluginBase;
   globalConfig(): GlobalConfiguration;
-  customData(trackingId?:string): object;
+  automaticallyData(trackingId?:string): object;
   clientId(): Promise<string>;
   measurement(): Promise<BaseInfo>;
 };
@@ -150,12 +150,12 @@ export class CTagContext implements ICTagContext {
     measurement: async (): Promise<BaseInfo> => {
       return await this.core.plugins[PluginMeasurement.NAME].execute();
     },
-    customData: async (trackingId?:string): Promise<object> => {
+    automaticallyData: async (trackingId?:string): Promise<object> => {
       const instance = this.getters.instance(trackingId);
       if (!instance) {
         throw Error(`Can't find instance tracking ID:${trackingId}`);
       }
-      return { ...instance.customData };
+      return { ...instance.automaticallyData };
     },
   };
 }

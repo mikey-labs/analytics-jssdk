@@ -1,3 +1,3 @@
 export interface Timing {
-  page_timing_duration: number; //计时类别
+  page_timing_duration: number; //计时时长
 }

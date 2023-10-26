@@ -7,11 +7,11 @@
 <body>
 <!-- Start Zaobao CN Analytics -->
 <script>
-    (function (r,c,u,p,a,m) {
-      r.ctag=r.ctag||function(){(r.ctag.q=r.ctag.q||[]).push(arguments)};
+    (function (r,c,u,p,t,a,m) {
+      r.ctag=r.ctag||function(){(r.ctag.q=r.ctag.q||[]).push(arguments)};r.ctag.ad=t;
       a=c.getElementsByTagName('head')[0];m=c.createElement('script');m.async=true;
       m.src=u+'?'+p;a.appendChild(m);
-    })(window,document,"../dist/ctag.js","id=TK-HEWM4FW")
+    })(window,document,"../dist/ctag.js","id=TK-HEWM4FW",{sm:112})
 </script>
 <!-- End Zaobao CN Analytics -->
 <script>
@@ -61,10 +61,10 @@
     //获取全局参数
     // ctag('get',"globalConfig",console.log)//
     //设置页面信息
-    ctag("set","custom",{
-        nihao:"5555"
-    });
-    // ctag("get","customData",console.log);
+    // ctag("set","auto",{
+    //     nihao:"5555"
+    // });
+    ctag("get","automaticallyData",console.log);
     // ctag('send',"screen_view",{
     //     page_name:"home",
     //     screen_id:'124',
@@ -113,6 +113,10 @@
             // stop()
         }
     });
+</script>
+<script>
+
+
 </script>
 </body>
 </html>
