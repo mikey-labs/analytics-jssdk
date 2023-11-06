@@ -17,6 +17,13 @@ import { assignObjectFilterSource } from "../Utils/AssignObjectFilterSource";
 import { PluginExposure } from "../Plugins/PluginExposure";
 import { BaseInfo } from "../Types/BaseInfo";
 import { CommandPlugin } from "../Command/CommandPlugin";
+import { PluginTiming } from "../Plugins/PluginTiming";
+import { generateSessionId } from "../Utils/GenerateSessionId";
+
+//@ts-ignore
+import Cookies from "js-cookie";
+import { SessionStorageStore } from "../Core/Footprint/ImmortalDB";
+
 export type PluginDerived = {
   new (options?: any): PluginBase;
 } & typeof PluginBase;
@@ -26,6 +33,7 @@ type CommandDerived = {
 } & typeof CommandBase;
 
 export const DEFAULT_TAG_NAME = "default";
+export const SESSION_ID = "ctag_session_id";
 export type ICTagContextGetters = {
   [p: string]: any;
   config(trackingId?: string): Configuration;
@@ -35,6 +43,7 @@ export type ICTagContextGetters = {
   automaticallyData(trackingId?:string): object;
   clientId(): Promise<string>;
   measurement(): Promise<BaseInfo>;
+  sessionId(): string;
 };
 
 export type ICTagContextSetters = {
@@ -58,16 +67,20 @@ export interface ICTagContext {
   registerPlugin(plugin: PluginDerived, options?: any): void;
   getters: ICTagContextGetters;
   setters: ICTagContextSetters;
-  autoTasks(): void;
+  autoTasks(): Promise<void>;
+  _generateSessionId():Promise<void>;
+  readonly session_id:string;
 }
 
 export class CTagContext implements ICTagContext {
   readonly version = "1.0.0";
+  session_id:string = "";
   globalConfig: GlobalConfiguration = {
     api_version: "1.0.0",
     api_secret: "",
     user_id: "",
-    api_host:""
+    api_host:"",
+    ssid:""
   };
   instances: { [p: string]: ITagManager } = {};
   core: { plugins: { [p: string]: PluginCore } };
@@ -93,8 +106,25 @@ export class CTagContext implements ICTagContext {
     };
     //add custom plugin
     this.registerPlugin(PluginExposure);
+    this.registerPlugin(PluginTiming);
+
+    //
+  }
+  async _generateSessionId():Promise<void>{
+    const store = new SessionStorageStore();
+    const sessionIdBase64 = await store.get(SESSION_ID);
+    if(sessionIdBase64){
+      try {
+        this.session_id = atob(sessionIdBase64);
+        return;
+      } catch (e){}
+    }
+    const footPrint = await this.core.plugins[PluginFootPrint.NAME].execute();
+    this.session_id = generateSessionId(footPrint);
+    await store.set(SESSION_ID,btoa(this.session_id));
   }
   async bootstrap(): Promise<this> {
+    await this._generateSessionId();
     await createCommandQueueProcessor(this);
     return this;
   }
@@ -108,7 +138,7 @@ export class CTagContext implements ICTagContext {
     this.executor.addCommand(CommandClass.NAME, commander);
   }
 
-  autoTasks(): void {
+  async autoTasks(): Promise<void> {
     Object.keys(this.instances).map((key) => {
       this.instances[key].run();
     });
@@ -157,8 +187,11 @@ export class CTagContext implements ICTagContext {
       }
       return { ...instance.automaticallyData };
     },
+    sessionId: (): string => {
+      return this.session_id;
+    },
   };
 }
 export async function buildCTagContext() {
-  return new CTagContext().bootstrap();
+  return new CTagContext().bootstrap()
 }

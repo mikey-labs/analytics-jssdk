@@ -1,4 +1,5 @@
 export interface BaseInfo extends WebBaseInfo {
+  session_id:string;//会话id
   scene_id?: string;//场景id
   ga_id: string;//ga id
   ip?: string; //ip地址，服务端收集

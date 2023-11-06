@@ -80,8 +80,8 @@ var a =
         "share_content_type": "string", //分享类型，图片，文字...
         "share_item_id": "string", //分享的内容，文章id等
 
-        /*用户页面停留时长：name=page_timing*/
-        "page_timing_duration": "number" //计时时长
+        /*用户页面停留时长：name=impression*/
+        "duration": "number" //计时时长
 
 
 

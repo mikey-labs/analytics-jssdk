@@ -1,9 +1,9 @@
 import { PageConfig, WebBaseInfo } from "./BaseInfo";
 import { Plugin, PluginOptions } from "./Plugin";
-import {Configuration, GlobalConfiguration} from "./Configuration";
+import { Configuration, GlobalConfiguration } from "./Configuration";
 import { ICTagContext } from "../Bootstrap/CTagContext";
 import { EventEntity, EventType } from "./Events";
-import {SetModuleName} from "../Command/CommandSet";
+import { SetModuleName } from "../Command/CommandSet";
 
 export type FuncOnReady = (ctx: ICTagContext) => void;
 

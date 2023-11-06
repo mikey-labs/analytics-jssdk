@@ -1,4 +1,4 @@
-import { ICTagContext, ICTagContextGetters } from "../Bootstrap/CTagContext";
+import { ICTagContext } from "../Bootstrap/CTagContext";
 import { CommandBase } from "./CommandBase";
 
 export class CommandPlugin extends CommandBase {

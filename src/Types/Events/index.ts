@@ -1,19 +1,19 @@
-import {LinkClickEvent} from "./LinkClickEvent";
-import {ScreenView} from "./ScreenView";
-import {Share} from "./Share";
-import {Timing} from "./Timing";
-import {Exception} from "./Exception";
-import {Search} from "./Search";
-import {FirstOpen} from "./FirstOpen";
+import { LinkClickEvent } from "./LinkClickEvent";
+import { ScreenView } from "./ScreenView";
+import { Share } from "./Share";
+import { Timing } from "./Timing";
+import { Exception } from "./Exception";
+import { Search } from "./Search";
+import { FirstOpen } from "./FirstOpen";
 
 export type EventType =
-    | "screen_view"
-    | "exception"
-    | "click"
-    | "first_open"
-    | "search"
-    | "share"
-    | "page_timing"
+  | "screen_view"
+  | "exception"
+  | "click"
+  | "first_open"
+  | "search"
+  | "share"
+  | "duration";
 export type EventEntity =
     | LinkClickEvent
     | ScreenView

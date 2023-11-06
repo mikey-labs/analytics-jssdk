@@ -3,7 +3,8 @@ import { PluginCore } from "./PluginBase";
 import { BaseInfo } from "../Types/BaseInfo";
 import Footprint from "../Core/Footprint";
 import { CookieStore } from "../Core/Footprint/ImmortalDB";
-import {isMobile} from "@zhengxy/use";
+import { isMobile } from "@zhengxy/use";
+
 export class PluginMeasurement extends PluginCore {
   static NAME: string = "measurement";
   readonly version: string = "1.0.0";
@@ -15,6 +16,8 @@ export class PluginMeasurement extends PluginCore {
   }
 
   async execute(): Promise<BaseInfo> {
+    const entity = typeof window.performance.getEntriesByType === "function" ? window.performance.getEntriesByType("navigation")[0] : null;
+    const performanceInfo =  (entity || window.performance.timing) as PerformanceNavigationTiming ;
     const {
       domainLookupEnd,
       domainLookupStart,
@@ -29,12 +32,9 @@ export class PluginMeasurement extends PluginCore {
       domContentLoadedEventStart,
       startTime,
       loadEventEnd,
-    } = (
-      typeof window.performance.getEntriesByType === "function"
-        ? window.performance.getEntriesByType("navigation")[0]
-        : window.performance.timing
-    ) as PerformanceNavigationTiming;
+    } = performanceInfo;
     return {
+      session_id: this.ctx.getters.sessionId(),
       ga_id: (await new CookieStore().get("_ga")) || "",
       ua: navigator.userAgent,
       referrer: document.referrer,
@@ -51,7 +51,7 @@ export class PluginMeasurement extends PluginCore {
       dns: domainLookupEnd - domainLookupStart,
       serve_response_time: responseStart - requestStart, //请求到开始响应时间
       content_load_time: domContentLoadedEventEnd - domContentLoadedEventStart,
-      browser_view_type:isMobile ? "mobile" : "desktop"
+      browser_view_type: isMobile ? "mobile" : "desktop",
     };
   }
 }

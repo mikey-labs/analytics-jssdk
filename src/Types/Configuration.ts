@@ -9,4 +9,5 @@ export interface GlobalConfiguration {
   user_id?: string; //登录用户ID
   api_version?: string;// api版本
   api_host?:string;
+  ssid?:string;
 }

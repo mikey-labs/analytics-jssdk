@@ -1,8 +1,8 @@
 import {
   createStore,
+  del as idbRemove,
   get as idbGet,
   set as idbSet,
-  del as idbRemove,
   UseStore,
 } from "idb-keyval";
 import { Store } from "./Store";

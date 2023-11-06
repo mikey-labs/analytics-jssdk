@@ -1,5 +1,5 @@
 import { ICTagContext } from "../Bootstrap/CTagContext";
-import { PluginBase, PluginCore } from "./PluginBase";
+import { PluginCore } from "./PluginBase";
 import { ImmortalDB, ImmortalStorage } from "../Core/Footprint/ImmortalDB";
 import Footprint from "../Core/Footprint";
 import { getSearchParam } from "../Utils/URLSearchParams";
@@ -15,7 +15,6 @@ export class PluginFootPrint extends PluginCore {
   }
   setup(): this {
     //执行一次 将数据存储到本地
-    this.execute();
     return this;
   }
 

@@ -1,4 +1,3 @@
-import { Command } from "./Command";
 import { FuncCnTagManager } from "../Bootstrap";
 
 declare global {

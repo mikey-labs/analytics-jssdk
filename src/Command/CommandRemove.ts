@@ -1,10 +1,11 @@
 import { CommandBase } from "./CommandBase";
 import { DEFAULT_TAG_NAME, ICTagContext } from "../Bootstrap/CTagContext";
+
 export type RemoveModuleName = "instance" | "plugin";
 export class CommandRemove extends CommandBase {
   static NAME = "remove";
   readonly version: string = "1.0.0";
-  constructor(public ctx: ICTagContext) {
+  constructor(ctx: ICTagContext) {
     super(ctx);
   }
   execute(methodName: string, callback: (result: boolean) => void): void {

@@ -1,5 +1,4 @@
 import { ICTagContext, PluginDerived } from "../Bootstrap/CTagContext";
-import { Plugin } from "../Types/Plugin";
 import { CommandBase } from "./CommandBase";
 
 export class CommandInstall extends CommandBase {

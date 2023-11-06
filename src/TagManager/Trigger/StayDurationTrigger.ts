@@ -1,35 +1,27 @@
-import { usePageVisibility } from "@zhengxy/use";
 import { TriggerBase } from "./TriggerBase";
+import { StayDuration } from "../../Plugins/PluginTiming";
 
 export class StayDurationTrigger extends TriggerBase {
   time: number;
-  private stopper: Function | undefined;
+  private stayDuration = new StayDuration();
   constructor(trackingId: string) {
     super(trackingId);
     this.time = Date.now();
   }
   stop(): void {
-    this.stopper?.();
+    this.stayDuration.stop();
   }
   start(): void {
     this.stop();
-    const { stop } = usePageVisibility((visibility) => {
-      if (visibility === "hidden") {
-        const timeValue = Date.now() - this.time;
-        if (timeValue >= 1000) {
-          window.ctag(
-            "send",
-            "page_timing",
-            {
-              page_timing_duration: timeValue, //计时时间
-            },
-            this.trackingId
-          );
-        }
-      } else {
-        this.time = Date.now();
-      }
+    this.stayDuration.start((timeValue) => {
+      window.ctag(
+        "send",
+        "duration",
+        {
+          stay: timeValue, //计时时间
+        },
+        this.trackingId
+      );
     });
-    this.stopper = stop;
   }
 }

@@ -2,7 +2,6 @@ import { DEFAULT_TAG_NAME, ICTagContext } from "../Bootstrap/CTagContext";
 import { TagManager } from "../TagManager";
 import { CommandBase } from "./CommandBase";
 import { Configuration } from "../Types/Configuration";
-import { PluginMeasurement } from "../Plugins/PluginMeasurement";
 
 export class CommandCreate extends CommandBase {
   static NAME = "create";

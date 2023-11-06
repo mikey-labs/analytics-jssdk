@@ -2,13 +2,13 @@ import { Command } from "../Types/Command";
 import { buildCTagContext, ICTagContext } from "./CTagContext";
 import { getSearchParam } from "../Utils/URLSearchParams";
 import { Configuration } from "../Types/Configuration";
-import {useEventListener} from "@zhengxy/use";
+import { useEventListener } from "@zhengxy/use";
 
 export interface FuncCnTagManager {
   (...arg: Command): void; // 命令函数
   ctx: ICTagContext;
   q: Command[];
-  ad:object | undefined;
+  ad: object | undefined;
 }
 window.ctag.q=window.ctag.q||[];
 window.ctag=window.ctag||function(...args:Command){window.ctag.q.push(args)};

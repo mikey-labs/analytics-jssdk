@@ -1,5 +1,6 @@
 import { MurmurHash3 } from "./MurmurHash3";
 import AudioPrint from "./AudioPrint";
+
 export abstract class IFootprint {
   abstract SPLIT_CODE: string;
   abstract hasLocalStorage(): boolean;
@@ -127,7 +128,7 @@ export default class Footprint implements IFootprint {
   }
 
   getRegularPluginsString() {
-    return Array.from(navigator.plugins)
+    return Array.from(navigator.plugins || [])
       .map(function (p) {
         const mimeTypes = Array.from(p)
           .map((mt) => {
@@ -207,7 +208,7 @@ export default class Footprint implements IFootprint {
 
   getConcurrency() {
     const Concurrency = Number.parseFloat(
-      navigator.hardwareConcurrency.toString()
+        (navigator.hardwareConcurrency || 2).toString()
     );
     return Number.isNaN(Concurrency) ? void 0 : Concurrency;
   }

@@ -6,11 +6,12 @@
     "module": "dist/ctag.esm.mjs",
     "types": "dist/index.d.ts",
     "scripts": {
-        "dev": "node ./build.js -w",
+        "start": "wds --node-resolve --app-index test/test.html --root-dir ./ --open",
+        "dev": "node ./build.mjs -w",
         "build": "pnpm clear && pnpm build:bundle && pnpm build:types",
         "clear": "rimraf ./dist",
         "build:types": "tsc -p ./tsconfig.json",
-        "build:bundle": "node ./build.js"
+        "build:bundle": "node ./build.mjs"
     },
     "exports": {
         ".": {
@@ -39,16 +40,24 @@
     },
     "homepage": "https://github.com/SPHTech-CQ/zaobao-analytics-jssdk#readme",
     "devDependencies": {
-        "esbuild": "^0.17.7",
+        "@babel/core": "^7.23.2",
+        "@babel/preset-env": "^7.23.2",
+        "@babel/preset-typescript": "^7.23.2",
+        "@types/crypto-js": "^4.1.3",
+        "@web/dev-server": "^0.3.6",
+        "esbuild": "^0.19.5",
+        "esbuild-plugin-babel": "^0.2.3",
+        "esbuild-plugin-pipe": "^0.2.0",
         "prettier": "^2.8.4",
         "rimraf": "^4.4.1",
         "typescript": "^4.9.5"
     },
     "dependencies": {
         "@zhengxy/exposure": "0.0.1-beta.6",
-        "@zhengxy/use": "0.0.8-beta.0",
+        "@zhengxy/use": "0.0.8-beta.2",
         "idb-keyval": "^6.2.1",
-        "js-cookie": "^3.0.5"
+        "js-cookie": "^3.0.5",
+        "visibilityjs": "^2.0.2"
     },
     "publishConfig": {
         "access": "public",

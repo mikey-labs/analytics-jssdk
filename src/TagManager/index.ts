@@ -1,10 +1,12 @@
 import { Configuration } from "../Types/Configuration";
-import {PageConfig} from "../Types/BaseInfo";
+import { PageConfig } from "../Types/BaseInfo";
 import { assignObjectFilterSource } from "../Utils/AssignObjectFilterSource";
 import { StayDurationTrigger } from "./Trigger/StayDurationTrigger";
 import { TriggerBase } from "./Trigger/TriggerBase";
 import { ExceptionReportTrigger } from "./Trigger/ExceptionReportTrigger";
 import { ScreenViewTrigger } from "./Trigger/ScreenViewTrigger";
+import { LinkClickTrigger } from "./Trigger/LinkClickTrigger";
+
 export type ITagManagerTriggers = {
   stay_duration: TriggerBase;
   exception_report: TriggerBase;
@@ -46,6 +48,7 @@ export class TagManager implements ITagManager {
       stay_duration: new StayDurationTrigger(trackingId),
       exception_report: new ExceptionReportTrigger(trackingId),
       screen_view: new ScreenViewTrigger(trackingId),
+      link_click:new LinkClickTrigger(trackingId)
     };
     options && (this.config = assignObjectFilterSource(this.config, options));
   }

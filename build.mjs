@@ -1,4 +1,6 @@
-const { build, context } = require("esbuild");
+import {build,context} from "esbuild";
+import babel from 'esbuild-plugin-babel'
+import pipe from "esbuild-plugin-pipe";
 const isWatch = process.argv.includes("-w");
 const bundle = (format,ext) => {
     const fileName = format === "iife" ? `${ext}` : `.${format}${ext}`;
@@ -7,12 +9,19 @@ const bundle = (format,ext) => {
         format,
         // globalName: "CA",
         bundle: true,
-        target: ["chrome53"],
+        target: ["es2016"],
         minify:!isWatch,
         minifyWhitespace:!isWatch,
         outfile,
         charset: "utf8",
         entryPoints: ["./src/index.ts"],
+        plugins:[
+            pipe({
+                plugins:[
+                    babel()
+                ]
+            }),
+        ]
     };
     if (isWatch) {
         context(config).then((ctx) => {

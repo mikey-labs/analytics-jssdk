@@ -7,9 +7,9 @@ export class ExceptionReportTrigger extends TriggerBase {
   }
 
   start(): void {
-    useEventListener(window,"error",(e:Error)=>{
-        console.log(e)
-    })
+    useEventListener(window, "error", (e: Error) => {
+      console.log(e);
+    });
   }
 
   stop(): void {}

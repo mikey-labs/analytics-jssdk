@@ -1,5 +1,5 @@
 import { BaseInfo } from "./BaseInfo";
-import {EventEntity, EventType} from "./Events";
+import { EventEntity, EventType } from "./Events";
 import { GlobalConfiguration } from "./Configuration";
 
 export interface EventParams {
