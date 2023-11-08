@@ -18,7 +18,7 @@
       r.ctag=r.ctag||function(){(r.ctag.q=r.ctag.q||[]).push(arguments)};r.ctag.ad=t;
       a=c.getElementsByTagName('head')[0];m=c.createElement('script');m.async=true;
       m.src=u+'?'+p;a.appendChild(m);
-    })(window,document,"/dist/ctag.js","id=TK-HEWM4FW",{sm:112})
+    })(window,document,"/dist/ctag.js","id=TK-HEWM4FW&exception_report=true",{sm:112})
 </script>
 <!-- End Zaobao CN Analytics -->
 <script>
@@ -77,10 +77,12 @@
     //     scene_id:"第三方身份"
     // })
     //初始化完成回调
-    // ctag((ctx)=>{
-    //     console.log("ready")
-    //     console.log(ctx)
-    // })
+    ctag((ctx)=>{
+        console.log("ready")
+        // n.a()
+        console.log(ctx)
+
+    })
     // ctag("plugin","duration:stay",(value)=>{
     //     console.log(value)
     //     ctag('send','duration',{

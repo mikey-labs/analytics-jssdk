@@ -38,13 +38,15 @@ if (document.currentScript) {
   }
 }
 
-
-
-useEventListener(window,'load',()=>{
+try {
   buildCTagContext().then((ctx) => {
     window.ctag.ctx = ctx;
-    ctx.autoTasks();
-  });
-})
+    ctx.autoTasks()
+  })
+}catch (e){
+  throw e;
+}
+
+
 
 
