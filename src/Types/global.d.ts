@@ -16,8 +16,13 @@ declare global {
     readonly browserLanguage: ReadonlyArray<string>;
     readonly systemLanguage: ReadonlyArray<string>;
   }
+
   interface HTMLElement {
     addBehavior: any;
+  }
+
+  interface Element {
+    msMatchesSelector:(selector:string)=>boolean;
   }
   interface Array<T> {
     __proto__: any;
