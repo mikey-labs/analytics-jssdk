@@ -6,7 +6,7 @@ import { object2UrlString } from "../Utils/Object2UrlString";
 import {ITagManager} from "../TagManager";
 import {usePageVisibility} from "@zhengxy/use";
 
-export const API_HOST = "https://www.zaobao.com/cg.gif";
+export const API_HOST = "https://nsdd.zaobao.com/appapi/apm-m/cg.gif";
 export class CommandSend extends CommandBase {
   static NAME = "send";
   readonly version: string = "1.0.0";
@@ -27,6 +27,7 @@ export class CommandSend extends CommandBase {
     trackingId?: string
   ) {
     const instance = this.ctx.getters.instance(trackingId);
+    if(instance?.config.disable)return;
     if (!instance)throw Error(`Can't find instance tracking ID:${trackingId}!`);
 
     const { api_secret, api_version, user_id,api_host,ssid } =
