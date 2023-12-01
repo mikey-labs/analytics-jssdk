@@ -1,6 +1,6 @@
 import { PluginBase } from "./PluginBase";
-import { usePageVisibility } from "@zhengxy/use";
 import * as Visibility from "visibilityjs";
+
 export class PluginTiming extends PluginBase {
   static NAME: string = "duration";
   readonly version: string = "1.0.0";

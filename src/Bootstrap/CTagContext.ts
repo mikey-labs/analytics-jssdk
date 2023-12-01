@@ -40,7 +40,7 @@ export type ICTagContextGetters = {
   instance(trackingId?: string): ITagManager | undefined;
   plugin(name: string): PluginBase;
   globalConfig(): GlobalConfiguration;
-  automaticallyData(trackingId?:string): object;
+  automaticallyData(trackingId?: string): object;
   clientId(): Promise<string>;
   measurement(): Promise<BaseInfo>;
   sessionId(): string;
@@ -68,19 +68,19 @@ export interface ICTagContext {
   getters: ICTagContextGetters;
   setters: ICTagContextSetters;
   autoTasks(): Promise<void>;
-  _generateSessionId():Promise<void>;
-  readonly session_id:string;
+  _generateSessionId(): Promise<void>;
+  readonly session_id: string;
 }
 
 export class CTagContext implements ICTagContext {
   readonly version = "1.0.0";
-  session_id:string = "";
+  session_id: string = "";
   globalConfig: GlobalConfiguration = {
     api_version: "1.0.0",
     api_secret: "",
     user_id: "",
-    api_host:"",
-    ssid:""
+    api_host: "",
+    ssid: "",
   };
   instances: { [p: string]: ITagManager } = {};
   core: { plugins: { [p: string]: PluginCore } };
@@ -110,18 +110,18 @@ export class CTagContext implements ICTagContext {
 
     //
   }
-  async _generateSessionId():Promise<void>{
+  async _generateSessionId(): Promise<void> {
     const store = new SessionStorageStore();
     const sessionIdBase64 = await store.get(SESSION_ID);
-    if(sessionIdBase64){
+    if (sessionIdBase64) {
       try {
         this.session_id = atob(sessionIdBase64);
         return;
-      } catch (e){}
+      } catch (e) {}
     }
     const footPrint = await this.core.plugins[PluginFootPrint.NAME].execute();
     this.session_id = generateSessionId(footPrint);
-    await store.set(SESSION_ID,btoa(this.session_id));
+    await store.set(SESSION_ID, btoa(this.session_id));
   }
   async bootstrap(): Promise<this> {
     await this._generateSessionId();
@@ -180,7 +180,7 @@ export class CTagContext implements ICTagContext {
     measurement: async (): Promise<BaseInfo> => {
       return await this.core.plugins[PluginMeasurement.NAME].execute();
     },
-    automaticallyData: async (trackingId?:string): Promise<object> => {
+    automaticallyData: async (trackingId?: string): Promise<object> => {
       const instance = this.getters.instance(trackingId);
       if (!instance) {
         throw Error(`Can't find instance tracking ID:${trackingId}`);
@@ -193,5 +193,5 @@ export class CTagContext implements ICTagContext {
   };
 }
 export async function buildCTagContext() {
-  return new CTagContext().bootstrap()
+  return new CTagContext().bootstrap();
 }

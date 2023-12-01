@@ -25,9 +25,7 @@ export class CommandSet extends CommandBase {
           ?.setPageConfig(config as PageConfig);
         break;
       case "auto":
-        this.ctx.getters
-            .instance(trackingId)
-            ?.setAutomaticallyData(config);
+        this.ctx.getters.instance(trackingId)?.setAutomaticallyData(config);
         break;
     }
   }

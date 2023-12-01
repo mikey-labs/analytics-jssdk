@@ -6,6 +6,7 @@
     <title>Title</title>
 <!--    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>-->
     <script>
+
         // VConsole will be exported to `window.VConsole` by default.
         // var vConsole = new window.VConsole();
     </script>
@@ -18,9 +19,10 @@
       r.ctag=r.ctag||function(){(r.ctag.q=r.ctag.q||[]).push(arguments)};r.ctag.ad=t;
       a=c.getElementsByTagName('head')[0];m=c.createElement('script');m.async=true;
       m.src=u+'?'+p;a.appendChild(m);
-    })(window,document,"/dist/ctag.js","id=TK-HEWM4FW&exception_report=true",{sm:112})
+    })(window,document,"/dist/ctag.js","id=TK-HEWM4FW&stay_duration=false&screen_view=true")
 </script>
 <!-- End Zaobao CN Analytics -->
+
 <script>
 
     //如果scr脚本未携带key，则需要手动创建实例
@@ -30,9 +32,8 @@
     // ctag("create","TK-CNNZIOMO");
     // //配置命令
     // ctag("config",{
-    //     stay_duration:true,
-    //     screen_view:false,
-    //     exception_report:false,
+    //     stay_duration:false,
+    //     screen_view:false
     // })
     // //获取指纹
     // ctag('get',"clientId",console.log);
@@ -70,6 +71,7 @@
     // ctag("set","auto",{
     //     nihao:"5555"
     // });
+    // ctag('get',"measurement",console.log)
     // ctag("get","automaticallyData",console.log);
     // ctag('send',"screen_view",{
     //     page_name:"home",
@@ -77,12 +79,12 @@
     //     scene_id:"第三方身份"
     // })
     //初始化完成回调
-    ctag((ctx)=>{
-        console.log("ready")
-        // n.a()
-        console.log(ctx)
-
-    })
+    // ctag((ctx)=>{
+    //     console.log("ready")
+    //     // n.a()
+    //     console.log(ctx)
+    //
+    // })
     // ctag("plugin","duration:stay",(value)=>{
     //     console.log(value)
     //     ctag('send','duration',{
@@ -147,10 +149,6 @@
             // stop()
         }
     });
-</script>
-<script>
-
-
 </script>
 </body>
 </html>

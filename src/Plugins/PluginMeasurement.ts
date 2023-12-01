@@ -16,8 +16,12 @@ export class PluginMeasurement extends PluginCore {
   }
 
   async execute(): Promise<BaseInfo> {
-    const entity = typeof window.performance.getEntriesByType === "function" ? window.performance.getEntriesByType("navigation")[0] : null;
-    const performanceInfo =  (entity || window.performance.timing) as PerformanceNavigationTiming ;
+    const entity =
+      typeof window.performance.getEntriesByType === "function"
+        ? window.performance.getEntriesByType("navigation")[0]
+        : null;
+    const performanceInfo = (entity ||
+      window.performance.timing) as PerformanceNavigationTiming;
     const {
       domainLookupEnd,
       domainLookupStart,

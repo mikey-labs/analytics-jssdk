@@ -2,7 +2,6 @@ import { Command } from "../Types/Command";
 import { buildCTagContext, ICTagContext } from "./CTagContext";
 import { getSearchParam } from "../Utils/URLSearchParams";
 import { Configuration } from "../Types/Configuration";
-import { useEventListener } from "@zhengxy/use";
 
 export interface FuncCnTagManager {
   (...arg: Command): void; // 命令函数
@@ -10,8 +9,12 @@ export interface FuncCnTagManager {
   q: Command[];
   ad: object | undefined;
 }
-window.ctag.q=window.ctag.q||[];
-window.ctag=window.ctag||function(...args:Command){window.ctag.q.push(args)};
+window.ctag.q = window.ctag.q || [];
+window.ctag =
+  window.ctag ||
+  function (...args: Command) {
+    window.ctag.q.push(args);
+  };
 if (document.currentScript) {
   const currentSrc = (document.currentScript as HTMLScriptElement).src;
   if (currentSrc) {
@@ -29,9 +32,9 @@ if (document.currentScript) {
           }
         }
       );
-      const command:Command[] = [["create", trackingId, options]]
-      if(window.ctag.ad && typeof window.ctag.ad === 'object'){
-        command.push(["set", 'auto', window.ctag.ad]);
+      const command: Command[] = [["create", trackingId, options]];
+      if (window.ctag.ad && typeof window.ctag.ad === "object") {
+        command.push(["set", "auto", window.ctag.ad]);
       }
       window.ctag.q.unshift(...command);
     }
@@ -41,12 +44,8 @@ if (document.currentScript) {
 try {
   buildCTagContext().then((ctx) => {
     window.ctag.ctx = ctx;
-    ctx.autoTasks()
-  })
-}catch (e){
+    ctx.autoTasks();
+  });
+} catch (e) {
   throw e;
 }
-
-
-
-

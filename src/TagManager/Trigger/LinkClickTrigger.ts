@@ -9,15 +9,15 @@ export class LinkClickTrigger extends TriggerBase {
     this.closestPolyfill();
     this.attachPageAnchorEvent();
   }
-  closestPolyfill(){
-    if (!Element.prototype.matches){
+  closestPolyfill() {
+    if (!Element.prototype.matches) {
       Element.prototype.matches =
-          Element.prototype.msMatchesSelector ||
-          Element.prototype.webkitMatchesSelector;
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.webkitMatchesSelector;
     }
-    if (!Element.prototype.closest){
-      Element.prototype.closest = function (selector:string) {
-        let el:Element | null = this;
+    if (!Element.prototype.closest) {
+      Element.prototype.closest = function (selector: string) {
+        let el: Element | null = this;
         if (!document.documentElement.contains(el)) return null;
         do {
           if (el.matches(selector)) return el;
@@ -29,10 +29,12 @@ export class LinkClickTrigger extends TriggerBase {
   }
   attachPageAnchorEvent() {
     const _self = this;
-    useEventListener(document,'click',function (e:MouseEvent) {
-      const linkElement:HTMLAnchorElement | null = (e.target as Element).closest('a[href]');
-      if(linkElement){
-        const {download,href,title,id,className} = linkElement
+    useEventListener(document, "click", function (e: MouseEvent) {
+      const linkElement: HTMLAnchorElement | null = (
+        e.target as Element
+      ).closest("a[href]");
+      if (linkElement) {
+        const { download, href, title, id, className } = linkElement;
         const { host } = new URL(href);
         const entity: LinkClickEvent = {
           link_download_text: download || "",
@@ -42,13 +44,12 @@ export class LinkClickTrigger extends TriggerBase {
           link_url: href,
           link_class: className,
           outbound: !_self.outboundWhiteList.some((domain) =>
-              host.includes(domain)
+            host.includes(domain)
           ),
         };
         window.ctag("send", "click", entity);
       }
-    })
-
+    });
   }
   stop(): void {}
   start(): void {}

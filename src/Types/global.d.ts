@@ -22,7 +22,7 @@ declare global {
   }
 
   interface Element {
-    msMatchesSelector:(selector:string)=>boolean;
+    msMatchesSelector: (selector: string) => boolean;
   }
   interface Array<T> {
     __proto__: any;
